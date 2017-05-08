@@ -106,7 +106,7 @@ static int process_results(void)
 
 		if (canonical_result.lookup_id(wu.canonical_resultid))
 		{
-			DC_log(LOG_ERR, "Result #%d is not in the database",
+			DC_log(LOG_ERR, "Result #%ld is not in the database",
 				wu.canonical_resultid);
 			mark_wu_complete(wu, TRUE);
 			continue;
@@ -292,7 +292,7 @@ static DC_MasterEvent *look_for_results(const char *wuFilter, const char *wuName
 
 	if (result.lookup_id(wu.canonical_resultid))
 	{
-		DC_log(LOG_ERR, "Result #%d is not in the database",
+		DC_log(LOG_ERR, "Result #%ld is not in the database",
 			wu.canonical_resultid);
 		mark_wu_complete(wu, FALSE);
 		return NULL;

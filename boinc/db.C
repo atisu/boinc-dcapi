@@ -214,7 +214,7 @@ int DC_sendWUMessage(DC_Workunit *wu, const char *message)
 		snprintf(msg.variety, sizeof(msg.variety), "%s", name);
 
 		if (msg.insert())
-			DC_log(LOG_WARNING, "Failed to send message to host %d",
+			DC_log(LOG_WARNING, "Failed to send message to host %ld",
 				result.hostid);
 	}
 	g_free(name);

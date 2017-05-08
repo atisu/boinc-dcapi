@@ -103,7 +103,7 @@ void DC_setSubresultCb(DC_SubresultCallback cb);
 void DC_setMessageCb(DC_MessageCallback cb);
 
 /* Queries the number of WUs known to the API in the given state. */
-int DC_getWUNumber(DC_WUState state);
+long DC_getWUNumber(DC_WUState state);
 
 /* Queries per-client configuration variables */
 char *DC_getClientCfgStr(const char *clientName, const char *key,

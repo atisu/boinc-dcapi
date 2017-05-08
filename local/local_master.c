@@ -720,9 +720,9 @@ static void countState(void *key, void *value, void *ptr)
 	if (wu->state == matchState) ++(*count);
 }
 
-int DC_getWUNumber(DC_WUState state)
+long DC_getWUNumber(DC_WUState state)
 {
-	int val = 0;
+	long val = 0;
 
 	matchState = state;
 	g_hash_table_foreach(_DC_wu_table, (GHFunc)countState, &val);

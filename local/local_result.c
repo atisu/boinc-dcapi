@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/resource.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -29,7 +30,7 @@ DC_Result *
 _DC_result_create(DC_Workunit *wu)
 {
 	DC_Result *r;
-	
+
 	r= g_new0(DC_Result, 1);
 	r->wu= wu;
 	return(r);
@@ -186,7 +187,7 @@ char *DC_getResultOutput(const DC_Result *result, const char *logicalFileName)
 			physicalFileName = strdup(file->path);
 			return physicalFileName;
 		}
-	}	
+	}
 
 	if (!strcmp(logicalFileName, DC_LABEL_STDOUT))
 	{

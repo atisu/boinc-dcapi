@@ -1852,10 +1852,11 @@ static void count_ready(void *key, void *value, void *ptr)
 		++(*count);
 }
 
-int DC_getWUNumber(DC_WUState state)
+long DC_getWUNumber(DC_WUState state)
 {
 	DB_BASE db("", &boinc_db);
-	int val, ret;
+	long val;
+	int ret;
 	char *query;
 
 	switch (state)
@@ -1872,7 +1873,7 @@ int DC_getWUNumber(DC_WUState state)
 					"(res.server_state = %d OR res.server_state = %d)",
 				project_uuid_str, RESULT_SERVER_STATE_UNSENT,
 				RESULT_SERVER_STATE_IN_PROGRESS);
-			ret = db.get_integer(query, val);
+			ret = db.get_long(query, val);
 			g_free(query);
 			if (ret)
 				return -1;
@@ -1883,10 +1884,11 @@ int DC_getWUNumber(DC_WUState state)
 				"wu.name LIKE '%s\\_%%' AND "
 				"wu.assimilate_state = %d",
 				project_uuid_str, ASSIMILATE_READY);
-			ret = db.get_integer(query, val);
+			ret = db.get_long(query, val);
 			g_free(query);
 			if (ret)
 				return -1;
+			// TODO: Bad idea
 			return val;
 		case DC_WU_ABORTED:
 			query = g_strdup_printf("SELECT COUNT(*) "
@@ -1894,10 +1896,11 @@ int DC_getWUNumber(DC_WUState state)
 				"wu.name LIKE '%s\\_%%' AND "
 				"wu.error_mask != 0",
 				project_uuid_str);
-			ret = db.get_integer(query, val);
+			ret = db.get_long(query, val);
 			g_free(query);
 			if (ret)
 				return -1;
+			// TODO: Bad idea
 			return val;
 		case DC_WU_SUSPENDED:
 			/* XXX */
